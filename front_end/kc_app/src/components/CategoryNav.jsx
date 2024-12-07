@@ -17,7 +17,8 @@ const CategoryNav = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedCategory?.count > 0) fetchCourses(selectedCategory.id);
+    if (selectedCategory?.count > 0 || !selectedCategory)
+      fetchCourses(selectedCategory?.id ?? null);
   }, [selectedCategory]);
 
   const fetchCategories = async () => {
