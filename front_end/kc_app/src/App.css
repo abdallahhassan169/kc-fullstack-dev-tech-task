@@ -62,14 +62,14 @@
 
 .card-title {
   white-space: nowrap;
- 
+  /* Truncate the title to a single line */
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .card-text.description {
   display: -webkit-box;
-  
+  /* Use flexbox for the description */
   -webkit-line-clamp: 3;
  
   -webkit-box-orient: vertical;

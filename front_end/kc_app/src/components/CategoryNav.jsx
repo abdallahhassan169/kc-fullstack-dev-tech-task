@@ -17,7 +17,7 @@ const CategoryNav = () => {
   }, []);
 
   useEffect(() => {
-    fetchCourses(selectedCategory);
+    if (selectedCategory?.count > 0) fetchCourses(selectedCategory.id);
   }, [selectedCategory]);
 
   const fetchCategories = async () => {
@@ -67,7 +67,7 @@ const CategoryNav = () => {
   };
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category.id);
+    setSelectedCategory(category);
     if (category.id in expandedCategories) {
       setExpandedCategories((prev) => {
         const { [category.id]: _, ...rest } = prev;
@@ -107,7 +107,8 @@ const CategoryNav = () => {
                     onClick={() => handleCategoryClick(category)}
                     style={{ cursor: "pointer" }}
                   >
-                    {category.name} ({category.count})
+                    {category.name}{" "}
+                    {category.count ? `(${category.count})` : ""}
                   </ListGroup.Item>
                   {expandedCategories[category.id] &&
                     category.subcategories && (
@@ -119,7 +120,8 @@ const CategoryNav = () => {
                             active={selectedCategory === subcat.id}
                             style={{ cursor: "pointer" }}
                           >
-                            {subcat.name} ({subcat.count})
+                            {subcat.name}{" "}
+                            {subcat.count ? `(${subcat.count})` : ""}
                           </ListGroup.Item>
                         ))}
                       </ListGroup>
